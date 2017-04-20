@@ -5,12 +5,12 @@ local amount = GetConVar( 'cinematicbar_barsize' )
 local effect = GetConVar( 'cinematicbar_effects' )
 local vert = GetConVar( 'cinematicbar_vertical' )
 
-local function DrawNoGapRect( x, y, w, h ) -- I seem to be getting gaps on a 1080 screen
+local function DrawNoGapRect( x, y, w, h )
 	surface.DrawRect( x - 1, y - 1, w + 2, h + 2 )
 end
 
-local function DrawBars( bVertical, size )
-	if bVertical then
+local function DrawBars( vertical, size )
+	if vertical then
 		DrawNoGapRect( 0, 0, size, ScrH() )
 		DrawNoGapRect( ScrW() - size, 0, size, ScrH() )
 	else
@@ -19,15 +19,15 @@ local function DrawBars( bVertical, size )
 	end
 end
 
-hook.Add( "RenderScreenspaceEffects", 'DrawCinematicBars', function() -- no HUDPaint for this stuff
+hook.Add( "RenderScreenspaceEffects", 'DrawCinematicBars', function()
 	local scale = amount:GetFloat()
 	local bloom = effect:GetBool()
 	local vbars = vert:GetBool()
 	if scale > 0 then
 		surface.SetDrawColor( 0, 0, 0, 255 )
-		DrawBars( vbars, vbars and (scale*ScrW()/2) or (scale*ScrH()/2) )
+		DrawBars( vbars, vbars and ( scale * ScrW() / 2 ) or ( scale * ScrH() / 2 ) )
 		if bloom then
-			DrawBloom( 0.1, scale*4, 22, 0, 1, 1, 0.8, 0.5, 0.2 )
+			DrawBloom( 0.1, scale * 4, 22, 0, 1, 1, 0.8, 0.5, 0.2 )
 		end
 	end
 end )
