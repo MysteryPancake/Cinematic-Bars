@@ -1,9 +1,9 @@
-CreateClientConVar( 'cinematicbar_barsize', '0.3', true, false )
-CreateClientConVar( 'cinematicbar_effects', '0', true, false )
-CreateClientConVar( 'cinematicbar_vertical', '0', true, false )
-local amount = GetConVar( 'cinematicbar_barsize' )
-local effect = GetConVar( 'cinematicbar_effects' )
-local vert = GetConVar( 'cinematicbar_vertical' )
+CreateClientConVar( "cinematicbar_barsize", "0.3", true, false )
+CreateClientConVar( "cinematicbar_effects", "0", true, false )
+CreateClientConVar( "cinematicbar_vertical", "0", true, false )
+local amount = GetConVar( "cinematicbar_barsize" )
+local effect = GetConVar( "cinematicbar_effects" )
+local vert = GetConVar( "cinematicbar_vertical" )
 
 local function DrawNoGapRect( x, y, w, h )
 	surface.DrawRect( x - 1, y - 1, w + 2, h + 2 )
@@ -19,7 +19,7 @@ local function DrawBars( vertical, size )
 	end
 end
 
-hook.Add( "RenderScreenspaceEffects", 'DrawCinematicBars', function()
+hook.Add( "RenderScreenspaceEffects", "DrawCinematicBars", function()
 	local scale = amount:GetFloat()
 	local bloom = effect:GetBool()
 	local vbars = vert:GetBool()
@@ -32,8 +32,8 @@ hook.Add( "RenderScreenspaceEffects", 'DrawCinematicBars', function()
 	end
 end )
 
-hook.Add( 'PopulateToolMenu', 'CinematicBarSettings', function()
-	spawnmenu.AddToolMenuOption( 'Options', 'Cinematic', 'Cinematic_Bar_Options', 'Cinematic Bars', '', '', function( panel )
+hook.Add( "PopulateToolMenu", "CinematicBarSettings", function()
+	spawnmenu.AddToolMenuOption( "Options", "Cinematic", "Cinematic_Bar_Options", "Cinematic Bars", "", "", function( panel )
 		panel:ClearControls()
 		panel:NumSlider( "Bar size", "cinematicbar_barsize", 0, 1 )
 		panel:CheckBox( "Vertical bars", "cinematicbar_vertical" )
