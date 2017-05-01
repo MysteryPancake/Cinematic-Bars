@@ -1,1 +1,1 @@
-AddCSLuaFile( 'autorun/client/cl_cinematicbars.lua' )
+AddCSLuaFile( "autorun/client/cl_cinematicbars.lua" )
