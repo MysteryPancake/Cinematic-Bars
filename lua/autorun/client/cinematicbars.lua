@@ -24,7 +24,7 @@ end
 hook.Add( "RenderScreenspaceEffects", "DrawCinematicBars", function()
 	local scale = amount:GetFloat()
 	if scale > 0 then
-		surface.SetDrawColor( 0, 0, 0, 255 )
+		surface.SetDrawColor( 0, 0, 0 )
 		DrawBars( vertical:GetBool(), scale )
 		if effect:GetBool() then
 			DrawBloom( 0.1, scale * 4, 22, 0, 1, 1, 0.8, 0.5, 0.2 )
