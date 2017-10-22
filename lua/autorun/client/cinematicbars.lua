@@ -1,4 +1,4 @@
-CreateClientConVar( "cinematicbar_barsize", "0.3", true, false )
+CreateClientConVar( "cinematicbar_barsize", "0.25", true, false )
 CreateClientConVar( "cinematicbar_effects", "0", true, false )
 CreateClientConVar( "cinematicbar_vertical", "0", true, false )
 local amount = GetConVar( "cinematicbar_barsize" )
@@ -9,7 +9,7 @@ local function DrawNoGapRect( x, y, w, h )
 	surface.DrawRect( x - 1, y - 1, w + 2, h + 2 )
 end
 
-local function DrawBars( vertical, scale )
+local function DrawBars( scale, vertical )
 	if vertical then
 		local size = scale * ScrW() / 2
 		DrawNoGapRect( 0, 0, size, ScrH() )
@@ -25,7 +25,7 @@ hook.Add( "RenderScreenspaceEffects", "DrawCinematicBars", function()
 	local scale = amount:GetFloat()
 	if scale > 0 then
 		surface.SetDrawColor( 0, 0, 0 )
-		DrawBars( vertical:GetBool(), scale )
+		DrawBars( scale, vertical:GetBool() )
 		if effect:GetBool() then
 			DrawBloom( 0.1, scale * 4, 22, 0, 1, 1, 0.8, 0.5, 0.2 )
 		end
